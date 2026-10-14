@@ -1,0 +1,13 @@
+# 凭据与环境文件，绝不入库
+.env
+.env.*
+*.key
+
+# 系统文件
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
