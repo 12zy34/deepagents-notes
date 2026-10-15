@@ -1,6 +1,13 @@
-# DeepAgents 学习笔记
+# Task1：我的第一个工具 Agent（第 1–2 章）
 
-[Datawhale《DeepAgents 实战》](https://datawhalechina.github.io/deepagents-in-action/chapters/ch02-quickstart/) 课程学习记录。
+> 资料来源声明：本目录的练习脚本改编自 Datawhale《DeepAgents 实战》课程
+> [ch02 Quickstart](https://datawhalechina.github.io/deepagents-in-action/chapters/ch02-quickstart/)
+> 的示例代码，并在模型接入方式上做了适配（复用本地 `.env`、更换可用模型）。
+> 完整引用清单见[仓库根 README](../README.md#引用与致谢)。
+
+- 课程教程：<https://datawhalechina.github.io/deepagents-in-action/>
+- B站视频：《Deep Agents 实战》 <https://space.bilibili.com/28357052/lists/7757577?type=season>
+- 课程仓库：<https://github.com/datawhalechina/deepagents-in-action>
 
 ## 目录
 
