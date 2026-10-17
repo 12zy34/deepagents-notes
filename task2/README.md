@@ -3,6 +3,10 @@
 > 资料来源声明：本目录练习改编自 Datawhale《DeepAgents 实战》课程
 > [ch03 虚拟文件系统](https://datawhalechina.github.io/deepagents-in-action/chapters/ch03-virtual-filesystem/)。
 > 完整引用清单见[仓库根 README](../README.md#引用与致谢)。
+>
+> - 课程教程：<https://datawhalechina.github.io/deepagents-in-action/>
+> - B站视频：《Deep Agents 实战》 <https://space.bilibili.com/28357052/lists/7757577?type=season>
+> - 课程仓库：<https://github.com/datawhalechina/deepagents-in-action>
 
 ## 目录
 
