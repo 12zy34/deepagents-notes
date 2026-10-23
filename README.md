@@ -9,6 +9,7 @@
 | [task1/](./task1/) | Task1（ch01–02）：我的第一个工具 Agent——Hello World / 多工具计算器 / 联网研究助手，附思维导图 |
 | [task2/](./task2/) | Task2（ch03）：虚拟文件系统——「写入 — 读回 — 修改」全链路，FilesystemBackend 落盘验证 |
 | [task3/](./task3/) | Task3（ch04）：任务规划——`TodoListMiddleware` 规划/执行/状态流转，`todos` 持久化对照实验 |
+| [task4/](./task4/) | Task4（ch05）：子 Agent 与上下文隔离——委派边界双向验证（messages 隔离 / files 穿透）、spec 继承对照 |
 
 <!-- 后续章节在此追加，例如：
 | [task2/](./task2/) | ch03 ... |

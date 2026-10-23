@@ -1,0 +1,23 @@
+$ uv run --frozen python ../notes/task4/code/subagent_spec.py
+
+=== 实验 A：system_prompt 不继承 ===
+子 Agent 的回答: MARK-CHILD 我是 Agnes-3.0-flash，由 Sapiens AI 开发。
+</think>
+
+我是 Agnes-3.0-flash，由 Sapiens AI 开发。
+含 MARK-CHILD : True
+含 MARK-PARENT: False
+>>> 通过：子 Agent 只认自己的 system_prompt
+
+=== 实验 B：tools 整体替换 ===
+子 Agent 的回答: NO_TOOL
+lookup 调用次数（父有该工具）: 0
+>>> 通过：tools=[] 是清零，父子工具集不会合并
+
+>>> 两条对照实验全部通过。源码依据：deepagents/graph.py:728 与 :740
+
+---
+运行环境：WSL + uv 0.12.24 + deepagents 0.7.8，模型 agnes-3.0-flash
+运行日期：2026-10-23
+附注：实验 A 的子 Agent 回答里混入了模型的 `</think>` 残片，原样保留。这是本次
+观察到的最有价值的现象之一——出边界只做"取最后一条非空 AIMessage"，不做任何清洗。

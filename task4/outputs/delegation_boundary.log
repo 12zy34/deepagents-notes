@@ -1,0 +1,35 @@
+$ uv run --frozen python ../notes/task4/code/delegation_boundary.py
+
+=== 父 Agent 的工具调用序列 ===
+- write_file: {'file_path': '/data/brief.md', 'content': '口令：ALPHA-7391；主题：子 Agent 上下文隔离验证。\n'}
+- task: {'description': '读取 /data/brief.md 文件，从中取得口令。然后用 lookup 工具分别检索 alpha、beta、gamma 三个主题的资料。最后只回一句结论，并附上
+
+=== lookup 调用计数（进程内）===
+共 3 次：['alpha', 'gamma', 'beta']
+说明：这些调用只发生在子 Agent 的上下文里，父 Agent 的 messages 中不应出现其原文。
+
+=== 泄漏检查 ===
+父上下文中含 [RAW-NOISE] 的 ToolMessage 数量: 0
+
+=== task 返回值（子 Agent 交回的全部内容）===
+长度: 41 字符
+内容: 已完成三项主题检索并验证子 Agent 上下文隔离，口令为 ALPHA-7391。
+
+=== state['files'] ===
+文件列表: ['/data/brief.md']
+--- /data/brief.md ---
+口令：ALPHA-7391；主题：子 Agent 上下文隔离验证。
+
+
+=== 断言 ===
+[1/5] 父 Agent 确实调用了 task
+[2/5] 父 Agent 没有自己去查资料
+[3/5] 子 Agent 内部执行了 3 次检索
+[4/5] 检索原文未进入父上下文（messages 方向已阻断）
+[5/5] 子 Agent 读到了父写的文件（files 方向穿透），且返回值被压缩
+
+>>> 验证通过：messages 隔离 / files 穿透 / 返回值压缩 三条同时成立
+
+---
+运行环境：WSL + uv 0.12.24 + deepagents 0.7.8，模型 agnes-3.0-flash
+运行日期：2026-10-23
