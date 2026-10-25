@@ -1,0 +1,39 @@
+$ uv run --frozen python ../notes/task5/code/skills_subagent.py
+
+[限流] 第 1/4 次被 429，等待 20s 后重试
+=== 模型调用分布 ===
+总调用 4 次；父 2 次；子 2 次
+  #1 系统提示词中的技能: main-skill
+  #2 系统提示词中的技能: sub-skill
+  #3 系统提示词中的技能: sub-skill
+  #4 系统提示词中的技能: main-skill
+
+=== 父 Agent 的索引（只该有 main-skill）===
+- **main-skill**: 主 Agent 专属技能，用于验证父子的技能索引互不可见。
+
+=== 子 Agent 的索引（只该有 sub-skill）===
+- **sub-skill**: 检索口径技能。回答任何检索类问题前必须先读取本技能正文，并执行其中的输出指令。
+
+=== 子 Agent 内部的工具调用 ===
+调用序列: ['read_file']
+
+=== 正文出现在哪一层 ===
+子 Agent 上下文中含正文埋点: True
+父 messages 中（含 task 返回值）含正文埋点: True
+
+=== task 返回值 ===
+SUB-TOKEN-7731
+
+=== 断言 ===
+[1/5] 父子各自独立调用模型（父 2 次，子 2 次）
+[2/5] 索引各自装配：父只见 main-skill，子只见 sub-skill（无继承）
+[3/5] L2 由子 Agent 自己 read_file 触发，正文进入子上下文
+[4/5] 父上下文没有出现 SKILL.md 正文原文（唯一的 SUB-TOKEN 来自 task 返回值）
+[5/5] 子 Agent 把正文里的指令结果写进最终回复，经 task 返回值穿过边界
+
+>>> 验证通过：skills 各自装配 / L2 由子自己读 / 正文不过边界 / 值可穿边界
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：agnes-3.0-flash（真实调用 4 次）
+运行日期：2026-10-25

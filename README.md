@@ -10,6 +10,7 @@
 | [task2/](./task2/) | Task2（ch03）：虚拟文件系统——「写入 — 读回 — 修改」全链路，FilesystemBackend 落盘验证 |
 | [task3/](./task3/) | Task3（ch04）：任务规划——`TodoListMiddleware` 规划/执行/状态流转，`todos` 持久化对照实验 |
 | [task4/](./task4/) | Task4（ch05）：子 Agent 与上下文隔离——委派边界双向验证（messages 隔离 / files 穿透）、spec 继承对照 |
+| [task5/](./task5/) | Task5（ch07）：Skills——三级加载的真实分工（L1 元数据 / 正文由模型自读）、会话快照与 last wins、父子各自装配 |
 
 <!-- 后续章节在此追加，例如：
 | [task2/](./task2/) | ch03 ... |
@@ -23,6 +24,7 @@
 |---|---|
 | 课程教程（Datawhale） | <https://datawhalechina.github.io/deepagents-in-action/> |
 | Task1 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch02-quickstart/> |
+| Task5 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch07-skills/> |
 | B站视频教程《Deep Agents 实战》 | <https://space.bilibili.com/28357052/lists/7757577?type=season> |
 | 课程代码仓库（Datawhale） | <https://github.com/datawhalechina/deepagents-in-action> |
 | DeepAgents 框架（LangChain 上游） | <https://github.com/langchain-ai/deepagents> |
