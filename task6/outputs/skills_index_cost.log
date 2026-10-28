@@ -1,0 +1,19 @@
+$ uv run --frozen python ../notes/task6/code/skills_index_cost.py
+
+=== input_tokens（Agnes 实际计数，单次模型调用）===
+skills=None        : 2794
+skills=[]（空列表） : 3208   （固定开销 = 414）
+skills=3 个        : 3337   （每技能边际 ≈ 43）
+skills=8 个        : 3552   （每技能边际 ≈ 43）
+
+=== 索引区字符数（8 个技能）===
+索引区约 824 字符（name + description + 路径三行 × 8）
+
+=== 同一 thread 连续两次调用的 input_tokens ===
+第 1 次模型调用: 3337（索引在提示词里：True）
+第 2 次模型调用: 3337（索引在提示词里：True）
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：agnes-3.0-flash（真实调用）
+运行日期：2026-10-28

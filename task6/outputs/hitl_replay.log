@@ -1,0 +1,18 @@
+$ uv run --frozen python ../notes/task6/code/hitl_replay.py
+
+=== 第一次 invoke 后 ===
+ENTERED: ['第 1 次进入 after_model']
+中断信息: {'问题': '继续吗？', '当前是第几次进入': 1}
+
+=== resume 之后 ===
+ENTERED: ['第 1 次进入 after_model', '第 2 次进入 after_model']
+
+=== 断言 ===
+[1/1] resume 时节点从头重放：interrupt() 之前的代码执行了 2 次
+
+>>> 验证通过：恢复 = 读档 + 从节点开头重放（副作用必须放 interrupt 之后或做成幂等）
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：未调用真实模型（脚本化假模型，零 token 消耗）
+运行日期：2026-10-28

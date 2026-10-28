@@ -1,0 +1,26 @@
+$ uv run --frozen python ../notes/task6/code/memory_scope.py
+
+=== 场景 1（t1 写两个文件）===
+state['files'] 的键: ['/notes.txt']
+Store 里 /preferences.md 内容: 张三喜欢简洁代码，注释中文
+
+=== 场景 2（换 thread t2，同 user-123）===
+state['files'] 的键: []
+新线程的 system prompt 里含记忆全文: True
+
+=== 场景 3（namespace 隔离）===
+user-456 读 /preferences.md: None
+
+=== 断言 ===
+[1/5] /memories/ 路由到 Store（长期），且已从 state 剥离
+[2/5] /notes.txt 进入 StateBackend（短期，state['files']）
+[3/5] 换 thread：/notes.txt 消失（短期），记忆经 memory= 重载进提示词（长期）
+[4/5] namespace 隔离：user-456 读不到 user-123 的记忆
+[5/5] CompositeBackend 剥掉了 /memories/ 前缀，Store key 是相对路径
+
+>>> 验证通过：短期(StateBackend)按 thread 隔离 / 长期(StoreBackend)跨 thread / namespace 隔离 / 前缀剥离
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：未调用真实模型（脚本化假模型，零 token 消耗）
+运行日期：2026-10-27

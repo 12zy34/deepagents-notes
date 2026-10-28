@@ -1,0 +1,27 @@
+$ uv run --frozen python ../notes/task6/code/memory_loading.py
+
+=== 各轮 system prompt 里的关键 token ===
+第 1 轮: 记忆全文 MEMORY-TOKEN-8801 = True，新值 9999 = False，skills 正文 SKILL-TOKEN = False
+第 2 轮(同 thread): 记忆全文 MEMORY-TOKEN-8801 = True，新值 9999 = False，skills 正文 SKILL-TOKEN = False
+第 3 轮(新 thread): 记忆全文 MEMORY-TOKEN-8801 = False，新值 9999 = True，skills 正文 SKILL-TOKEN = False
+
+=== HTML 注释是否被剥掉 ===
+提示词里含 '内部备注': False
+
+=== state 里的字段 ===
+memory_contents 的键: ['/memories/preferences.md']
+skills_metadata 条数: 1
+
+=== 断言 ===
+[1/5] memory= 的文件全文进入 system prompt
+[2/5] skills 只进索引、不进正文（对照成立）
+[3/5] HTML 注释 <!-- --> 在注入前被剥掉
+[4/5] 同 thread 第二轮不重载（state 已有 memory_contents）
+[5/5] 换 thread_id 才重新加载
+
+>>> 验证通过：memory 全文注入 / skills 只进索引 / HTML 注释剥除 / 会话快照 / 换线程重载
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：未调用（录制型假模型，零 token 消耗）
+运行日期：2026-10-27

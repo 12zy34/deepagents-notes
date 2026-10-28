@@ -1,0 +1,29 @@
+$ uv run --frozen python ../notes/task6/code/hitl_approval.py
+
+=== 案例 A：第一次 invoke（应在此暂停）===
+中断数量: 1
+action_requests: [{'name': 'delete_file', 'args': {'path': '/tmp/temp.txt'}, 'description': "Tool execution requires approval\n\nTool: delete_file\nArgs: {'path': '/tmp/temp.txt'}"}]
+review_configs: [{'action_name': 'delete_file', 'allowed_decisions': ['approve', 'edit', 'reject']}]
+暂停时 delete_file 被调用次数: 0
+
+=== 案例 A：approve 恢复之后 ===
+delete_file 被调用次数: 1 参数: ['/tmp/temp.txt']
+最终 AI 消息: 已按你的要求处理。
+
+=== 案例 B：reject 恢复之后 ===
+delete_file 被调用次数: 0
+reject 的 ToolMessage.status: error
+reject 的 ToolMessage.content: User rejected the tool call for `delete_file` with reason: 不
+
+=== 断言 ===
+[1/4] 中断发生，action_requests 含工具名/参数，review_configs 含允许决策
+[2/4] 暂停时 delete_file 未执行
+[3/4] approve 恢复后，delete_file 按原参数执行了一次
+[4/4] reject 恢复后，delete_file 未执行，模型收到 status=error 的拒绝消息
+
+>>> 验证通过：interrupt_on 中断 / approve 执行 / reject 不执行且反馈给模型
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：未调用真实模型（脚本化假模型，零 token 消耗）
+运行日期：2026-10-28

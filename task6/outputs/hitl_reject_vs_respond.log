@@ -1,0 +1,26 @@
+$ uv run --frozen python ../notes/task6/code/hitl_reject_vs_respond.py
+
+=== 同一句： 不要删除，改为归档。 ===
+
+[reject]
+  工具执行次数: 0
+  AI 收到的 status: error
+  AI 收到的内容: User rejected the tool call for `delete_file` with reason: 不要删除，改为归档。
+
+[respond]
+  工具执行次数: 0
+  AI 收到的 status: success
+  AI 收到的内容: 不要删除，改为归档。
+
+=== 断言 ===
+[1/3] reject 与 respond 都没有执行删除函数（文件都还在）
+[2/3] reject：status='error'，明确告诉 AI「被拒绝了、没执行」
+[3/3] respond：status='success'，人的话被当作工具结果
+
+>>> 验证通过：都不执行工具，但 reject 告诉 AI「失败」、respond 告诉 AI「成功」
+>>> 所以：拒绝删除/发送/部署必须用 reject；respond 只用于「本来就是问人」的工具
+
+---
+运行环境：Linux + Python 3.12.3 + deepagents 0.7.8
+模型：未调用真实模型（脚本化假模型，零 token 消耗）
+运行日期：2026-10-28
