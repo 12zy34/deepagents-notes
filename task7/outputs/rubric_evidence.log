@@ -1,0 +1,24 @@
+$ uv run --frozen python ../notes/task7/code/rubric_evidence.py
+
+=== set 实现（会崩） ===
+{'ok': False, 'failures': ["test_unhashable: TypeError: unhashable type: 'list'"]}
+
+=== 排序去重（结果对、顺序错） ===
+{'ok': False, 'failures': ['test_basic: expected [2, 1], got [1, 2]']}
+
+=== 列表 + 相等比较（正确） ===
+{'ok': True, 'failures': []}
+
+=== 断言 ===
+[1/4] set 实现被抓到：test_unhashable 抛 TypeError
+[2/4] 排序实现被抓到：test_basic 期望 [2, 1]、实际 [1, 2]（顺序语义）
+[3/4] 正确实现四条用例全过，且未修改输入
+[4/4] 修改输入的实现被抓到：input was mutated
+
+>>> 验证通过：证据工具能抓住三类问题——崩溃、语义顺序错、修改输入
+>>> 这正是 Rubric 要求的「可取证」：能由测试确定的事，不交给模型猜
+
+---
+运行环境：Linux + Python 3.12.3 + 无模型调用
+deepagents 版本（环境）：0.7.8
+运行日期：2026-10-31

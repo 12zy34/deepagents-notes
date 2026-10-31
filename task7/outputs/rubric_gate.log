@@ -1,0 +1,26 @@
+$ uv run --frozen python ../notes/task7/code/rubric_gate.py
+
+=== 验收门对五种结果的判定 ===
+没有任何评审记录     → accepted=False（期望 False） 未知状态默认拒绝
+首轮就需要修订      → accepted=False（期望 False） 有 gap 时不能放行
+预算耗尽         → accepted=False（期望 False） 没通过就是没通过
+评分认为标准无法评估   → accepted=False（期望 False） 失败不是通过
+评分链路异常       → accepted=False（期望 False） 异常不是通过
+声称通过但覆盖不全    → accepted=False（期望 False） 降级结论不放行
+明确通过         → accepted=True （期望 True ） 唯一放行条件
+多轮后通过        → accepted=True （期望 True ） 只看最后一轮
+
+=== 反例：用 bool(messages) 当验收门 ===
+有最终消息: True ｜评审结论: needs_revision
+→ bool(messages) 会放行一份被评审拒绝的候选答案
+
+=== 断言 ===
+[1/3] 五种非 satisfied 结果全部不放行（含 unverified=True 的降级通过）
+[2/3] 只有 satisfied 且 unverified=False 才放行
+[3/3] 反例成立：bool(messages)=True 但 fail_closed=False，差一条状态判断
+
+>>> 验证通过：未知状态默认拒绝；有候选答案 ≠ 验收通过
+
+---
+运行环境：Linux + Python 3.12.3 + 无模型调用
+运行日期：2026-10-31

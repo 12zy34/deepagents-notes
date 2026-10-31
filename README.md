@@ -12,6 +12,7 @@
 | [task4/](./task4/) | Task4（ch05）：子 Agent 与上下文隔离——委派边界双向验证（messages 隔离 / files 穿透）、spec 继承对照 |
 | [task5/](./task5/) | Task5（ch07）：Skills——三级加载的真实分工（L1 元数据 / 正文由模型自读）、会话快照与 last wins、父子各自装配 |
 | [task6/](./task6/) | Task6（ch08–09）：长期记忆与人机审批——memory 全文注入 vs skills 索引、短期/长期存储、中断存档与从头重放、四种决策对照 |
+| [task7/](./task7/) | Task7（ch13）：评分量规——生成结束≠任务完成、证据工具、四角色闭环、五种结果与 fail-closed 验收门、两处 tools 的归属 |
 
 <!-- 后续章节在此追加，例如：
 | [task2/](./task2/) | ch03 ... |
@@ -27,6 +28,7 @@
 | Task1 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch02-quickstart/> |
 | Task5 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch07-skills/> |
 | Task6 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch08-long-term-memory/> · <https://datawhalechina.github.io/deepagents-in-action/chapters/ch09-human-in-the-loop/> |
+| Task7 对应章节 | <https://datawhalechina.github.io/deepagents-in-action/chapters/ch13-grading-rubrics/> |
 | B站视频教程《Deep Agents 实战》 | <https://space.bilibili.com/28357052/lists/7757577?type=season> |
 | 课程代码仓库（Datawhale） | <https://github.com/datawhalechina/deepagents-in-action> |
 | DeepAgents 框架（LangChain 上游） | <https://github.com/langchain-ai/deepagents> |

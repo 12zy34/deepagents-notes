@@ -1,0 +1,21 @@
+$ uv run --frozen python ../notes/task7/code/rubric_task_vs_rubric.py
+
+=== 「输出必须是纯代码」这条要求，写在哪份文件里？ ===
+TASK（工作模型读）                  条目数=0  命中格式要求=['only executable python source code']
+WEAK_RUBRIC（评分模型读）           条目数=7  命中格式要求=无
+STRONG_RUBRIC（评分模型读）         条目数=9  命中格式要求=['no prose', 'markdown fence', 'parse as valid python']
+
+=== 评分模型实际读的是哪份？ ===
+RUBRIC（不是 TASK）—— 所以 WEAK_RUBRIC 没写，它就不知道要检查。
+
+=== 断言 ===
+[1/3] TASK 里确实写了「只返回可执行代码」——所以不是「任务没传达」
+[2/3] WEAK_RUBRIC 的 7 条里没有任何格式标准——评分模型看不到这条要求
+[3/3] STRONG_RUBRIC 补上两条格式标准后，评分模型才有东西可检查
+
+>>> 结论：要求写在 TASK 里 = 工作模型知道；写在 RUBRIC 里 = 评分模型才会查
+>>> 所以「satisfied 但不合格」的直接原因是 Rubric 漏写，不是任务没传达
+
+---
+运行环境：Linux + Python 3.12.3 + 无模型调用
+运行日期：2026-10-31
