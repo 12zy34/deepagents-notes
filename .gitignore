@@ -11,3 +11,9 @@ Thumbs.db
 __pycache__/
 *.pyc
 .venv/
+
+# task3 动画与音视频大文件（体积大，刻意不入库；PNG 思维导图仍正常提交）
+task3/animation/
+task3/animation-v2/
+task3/*.mp3
+task3/*.mp4
