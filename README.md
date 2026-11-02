@@ -13,9 +13,10 @@
 | [task5/](./task5/) | Task5（ch07）：Skills——三级加载的真实分工（L1 元数据 / 正文由模型自读）、会话快照与 last wins、父子各自装配 |
 | [task6/](./task6/) | Task6（ch08–09）：长期记忆与人机审批——memory 全文注入 vs skills 索引、短期/长期存储、中断存档与从头重放、四种决策对照 |
 | [task7/](./task7/) | Task7（ch13）：评分量规——生成结束≠任务完成、证据工具、四角色闭环、五种结果与 fail-closed 验收门、两处 tools 的归属 |
+| [task8/](./task8/) | Task8（ch01–09 + ch13 综合）：可复现教学 Agent——teach skill 升级为 DeepAgents 图；learner.md 升级为 `record_mistake` 工具、接真实评分模型跑端到端 Rubric 闭环 |
 
 <!-- 后续章节在此追加，例如：
-| [task2/](./task2/) | ch03 ... |
+| [task9/](./task9/) | chXX ... |
 -->
 
 ## 引用与致谢

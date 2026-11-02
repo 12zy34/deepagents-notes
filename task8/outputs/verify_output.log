@@ -1,0 +1,56 @@
+$ uv run --frozen python ../teach-agent/verify_teach_agent.py
+
+=== system prompt 关键证据 ===
+含 teach 技能索引 '- **teach**:': True
+含记忆全文埋点 MEM-TOKEN-TEACH-7742: True
+含 HTML 注释内部备注（应为 False）: False
+含技能正文埋点 BODY-TOKEN-TEACH-9981（应为 False）: False
+
+=== 断言（能力1 Skills + 能力2 Memory）===
+[1/2] 能力1：teach 技能索引进 system prompt（正文由模型自读，不预加载）
+[2/2] 能力2：learner.md 全文注入 + HTML 注释注入前被剥除
+
+=== 能力3 HITL：第一次 invoke（应暂停）===
+中断数量: 1
+action_requests: [{'name': 'publish_page', 'args': {'content': '《Skills 四层递进》教学页全文……'}, 'description': "Tool execution requires approval\n\nTool: publish_page\nArgs: {'content': '《Skills 四层递进》教学页全文……'}"}]
+review_configs: [{'action_name': 'publish_page', 'allowed_decisions': ['approve', 'edit', 'reject']}]
+暂停时 publish_page 执行次数: 0
+
+=== approve 恢复之后 ===
+publish_page 执行次数: 1 内容长度: 20
+
+=== reject 恢复之后 ===
+publish_page 执行次数: 0
+reject 的 ToolMessage.status: error
+
+=== 断言（能力3 HITL）===
+[1/3] 能力3：publish_page 触发中断，action_requests / review_configs 正确
+[2/3] 能力3：暂停时 publish_page 未执行
+[3/3] 能力3：approve 恢复后，publish_page 按原参数执行了一次
+
+=== 能力4 Rubric：图组装 + 证据工具 ===
+D:\study\deepagents-in-action\teach-agent\teach_agent.py:235: LangChainBetaWarning: The middleware `RubricMiddleware` is in beta. It is actively being worked on, so the API may change.
+  RubricMiddleware(
+[1/3] 能力4：Skills + Memory + HITL + Rubric 成功接入同一张 create_deep_agent 图
+[2/3] 好教学页 -> ok=True，坏教学页 -> ok=False
+[3/3] 能力4：check_lesson_structure 证据工具能区分达标 / 不达标教学页
+
+=== 能力5：record_mistake 写入长期记忆 ===
+工具返回: 已记录错题 LM-20261102-210045 到长期记忆 learner.md。
+是否追加了 LM- 开头的错题: True
+[1/2] 能力5：record_mistake 把错题结构化追加进 learner.md（埋点仍在，证明插入在错题段）
+[2/2] 能力5：Agent 在对话中调用 record_mistake 自动追加错题到 learner.md
+
+=== 能力4：真实评分模型端到端 Rubric 闭环 ===
+[真实] 评审轮数: 2
+  iter 0: needs_revision  gaps=['通过 check_lesson_structure 取证且 ok=true', '收尾包含『面试官追问』与可背的 90 秒答案', '若发现学习者有错误理解，必须调用 record_mistake 写入长期记忆']
+  iter 1: satisfied  gaps=[]
+[真实] 最终结论: satisfied
+[1/1] 能力4：真实评分模型已跑通端到端 Rubric 闭环（check_lesson_structure 取证 + 验收）
+
+>>> 验证通过：5 项能力全部按 deepagents 0.7.8 真实 API 接入并各自行为正确
+
+---
+运行环境：Windows + Python 3.12.14 + deepagents 0.7.8
+能力1/2/3/5：零 token（录制型/脚本化假模型）；能力4 端到端：已接真实评分模型跑通
+运行日期：2026-11-02
